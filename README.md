@@ -1,0 +1,57 @@
+
+# Device Pulse 
+
+
+
+A real-time Flutter Android application that monitors device sensors and health data, allowing for instant sharing across a local Wi-Fi network.
+
+##  Features
+- Real-Time Dashboard: Displays live readings for battery, steps, activity, and network strength.
+- Zero-Config Sharing: Automatically discovers other devices on the same Wi-Fi using UDP broadcasting.
+- Data Persistence: Stores received snapshots locally, allowing data to persist after app restarts.
+- Native Bridges:Uses MethodChannels to access low-level Android sensors not available in standard Flutter plugins.
+
+##  Data Points Collected (Real Sensors Only)
+This app strictly follows the "No Mock Data" requirement by accessing:
+- Battery: Temperature (°C), Health Status, and Level (%).
+- Health: Step count (boot-based) and Detected Activity (Walking, Still, etc.).
+- Connectivity: Wi-Fi SSID, RSSI (Signal Strength), and Local IP.
+- Cellular: Carrier Name, Signal Strength (dBm), and SIM State.
+- Device: Model, Android Version, and Device Name.
+
+## Project Structure & Deliverables
+As per the task requirements, the following documentation is included:
+- [DECISIONS.md](./DECISIONS.md): Justification for using **Hive** for local storage and technical constraints.
+- [NOTES.md](./NOTES.md): Design rationale and implementation details of the Native Platform Channels and UDP networking.
+
+##  Getting Started
+
+### Prerequisites
+- Flutter SDK (Latest Stable)
+- Android Device (API Level 21 or higher)
+- Both devices must be on the same Wi-Fi network for sharing.
+
+### Installation
+1. Get Packages:
+   **flutter pub get**
+
+2. Run the App:
+  **flutter run**
+
+
+## Local Networking Logic
+
+The app uses a peer-to-peer discovery flow:
+
+1. Broadcast: Tapping "Share My Pulse" sends a UDP broadcast to the local subnet.
+2. Listen: Nearby devices listening on the designated port catch the packet.
+3. Save: Incoming snapshots are validated and saved to the Hive box for persistent viewing.
+
+
+
+Submitted by:Hossain Ahammed
+Contact:hossainahammed627@gmail.com
+
+
+
+
